@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Profil mit YouTube Hintergrund</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    /* Hintergrund-Container */
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    #video-background iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120vw;
+      height: 120vh;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: none;
+    }
+
+    /* Profil-Karte */
+    .card {
+      width: 350px;
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+    }
+
+    h2 {
+      margin: 10px 0 5px;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    /* Spotify Icon */
+    .spotify-link img {
+      width: 40px;
+      height: 40px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .spotify-link img:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hintergrund Video -->
+  <div id="video-background">
+    <iframe id="ytplayer" type="text/html"
+      src="https://www.youtube.com/embed/GVX4sC6qKYk?autoplay=1&mute=1&controls=0&loop=1&playlist=GVX4sC6qKYk&modestbranding=1&showinfo=0"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
+
+  <!-- Profil Card -->
+  <div class="card" id="profileCard">
+    <img src="https://cdn.discordapp.com/attachments/1375548792866340907/1411057867276030012/discord_pfp_512.png?ex=68b3458b&is=68b1f40b&hm=2fe9d76a670e36e2a2db9aa54feb4b1fed575086b96c5a2d4489f65151315cb0" 
+         alt="Avatar" class="avatar">
+    <h2>wasd_him</h2>
+    <p>ID: 1375536321405124791</p>
+
+    <!-- Spotify Button -->
+    <a class="spotify-link" href="https://open.spotify.com/playlist/36BS72kjzt0c8BIkwOvQUB?si=965ab48a57b04382" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify">
+    </a>
+  </div>
+
+  <script>
+    const card = document.getElementById("profileCard");
+
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * 15; 
+      const rotateY = ((x - centerX) / centerX) * -15;
+
+      card.style.transform = `scale(1.07) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      card.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.5)";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
+      card.style.boxShadow = "0 20px 40px rgba(0, 0, 0, 0.3)";
+    });
+  </script>
+</body>
+</html>
