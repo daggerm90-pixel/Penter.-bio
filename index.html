@@ -28,24 +28,25 @@
       transform-style:preserve-3d;
     }
     .avatar {width:120px;height:120px;border-radius:50%;margin-bottom:15px;border:3px solid rgba(255,255,255,0.5);}
-    h2.sunset-glow {
-      margin:10px 0 5px;
-      font-size:28px;
-      font-weight:bold;
-      background:linear-gradient(270deg,#ff9a00,#ff4d4d,#ff77aa,#a64dff);
-      background-size:600% 600%;
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      animation:sunsetGlow 12s ease infinite;
-      text-shadow:0 0 15px rgba(255,120,50,0.7),
-                  0 0 30px rgba(255,80,120,0.5),
-                  0 0 45px rgba(180,80,255,0.4);
-    }
-    @keyframes sunsetGlow {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
+    h2 {
+  margin:10px 0 5px;
+  font-size: 32px;
+  font-weight: bold;
+  background: radial-gradient(circle, #9b59b6, #e67e22, #f1c40f);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rotateGradient 5s linear infinite;
+  text-shadow: 2px 2px 5px rgba(204, 0, 255, 0.281); /* schwarzer Schatten */
+}
+
+@keyframes rotateGradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 50%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
     p {margin:5px 0;font-size:14px;color:#ddd;}
     .spotify-link img {width:40px;height:40px;margin-top:10px;cursor:pointer;transition:transform .2s;}
     .spotify-link img:hover {transform:scale(1.2);}
