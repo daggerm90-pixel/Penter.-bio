@@ -29,24 +29,31 @@
     }
     .avatar {width:120px;height:120px;border-radius:50%;margin-bottom:15px;border:3px solid rgba(255,255,255,0.5);}
     h2 {
-  margin:10px 0 5px;
-  font-size: 32px;
-  font-weight: bold;
-  background: radial-gradient(circle, #9b59b6, #e67e22, #f1c40f);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rotateGradient 5s linear infinite;
-  text-shadow: 2px 2px 5px rgba(204, 0, 255, 0.281); /* schwarzer Schatten */
-}
-
-@keyframes rotateGradient {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 50% 50%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 50%; }
-  100% { background-position: 0% 50%; }
-}
+      margin:10px 0 5px;
+      font-size: 32px;
+      font-weight: bold;
+      background: radial-gradient(circle, #9b59b6, #e67e22, #f1c40f);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rotateGradient 5s linear infinite;
+      text-shadow: 2px 2px 5px rgba(204, 0, 255, 0.281);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    h2 img.flag {
+      width:40px;  /* geändert */
+      height:40px; /* geändert */
+      border-radius:5px;
+    }
+    @keyframes rotateGradient {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 50%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     p {margin:5px 0;font-size:14px;color:#ddd;}
     .spotify-link img {width:40px;height:40px;margin-top:10px;cursor:pointer;transition:transform .2s;}
     .spotify-link img:hover {transform:scale(1.2);}
@@ -73,13 +80,11 @@
       display:flex;align-items:center;gap:8px;
       justify-content:center;
     }
-    .volume input[type=range] {
-      width:150px;
-    }
+    .volume input[type=range] {width:150px;}
   </style>
 </head>
 <body>
-  <!-- Hintergrund -->
+  <!-- Hintergrund (stumm) -->
   <div id="video-background">
     <iframe src="https://www.youtube.com/embed/Ulm_Z646eBg?autoplay=1&mute=1&controls=0&loop=1&playlist=Ulm_Z646eBg&modestbranding=1&showinfo=0"></iframe>
   </div>
@@ -87,8 +92,12 @@
   <!-- Profil Card -->
   <div class="card" id="profileCard">
     <img src="https://cdn.discordapp.com/attachments/1375548792866340907/1411057867276030012/discord_pfp_512.png?ex=68b4970b&is=68b3458b&hm=956bf5bd5739de2d3df14a05ecdf6e61c4665b4564be184e2babb278b4a71311" alt="Avatar" class="avatar">
-    <h2 class="sunset-glow">wasd_him</h2>
-    <p>Hobby's: Hobbylos</p>
+    <h2 class="sunset-glow">
+      <span>wasd_him</span>
+      <img class="flag" src="https://emojigraph.org/media/apple/flag-turkey_1f1f9-1f1f7.png" alt="TR">
+    </h2>
+    <p>Orginaler Törke</p>
+
     <!-- Tags -->
     <div class="tags">
       <span class="tag">Fivem</span>
@@ -114,8 +123,8 @@
     </div>
   </div>
 
-  <!-- Unsichtbarer YouTube-Player -->
-  <div id="yt-audio" style="display:none;"></div>
+  <!-- Unsichtbarer YouTube-Player für Audio -->
+  <div id="yt-audio"></div>
 
   <script>
     // Karte Animation
@@ -134,7 +143,7 @@
       card.style.boxShadow="0 20px 40px rgba(0,0,0,0.3)";
     });
 
-    // YouTube Player
+    // YouTube Player nur für Audio
     let audioPlayer,playing=true,progressBar;
 
     function onYouTubeIframeAPIReady(){
@@ -147,9 +156,6 @@
 
     function onPlayerReady(event){
       progressBar=document.getElementById("progressBar");
-      audioPlayer.mute();
-      audioPlayer.playVideo();
-      setTimeout(()=>audioPlayer.unMute(),500);
       audioPlayer.setVolume(50);
       setInterval(updateProgress,500);
     }
