@@ -5,134 +5,184 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discord Profil mit YouTube Hintergrund</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body,html {
+      width:100%;height:100%;overflow:hidden;
+      font-family:Arial,sans-serif;
+      display:flex;justify-content:center;align-items:center;color:white;
     }
-
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-    }
-
-    /* Hintergrund-Container */
     #video-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      z-index: -1;
+      position:fixed;top:0;left:0;width:100vw;height:100vh;overflow:hidden;z-index:-1;
     }
-
     #video-background iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 120vw;
-      height: 120vh;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      border: none;
+      position:absolute;top:50%;left:50%;
+      width:120vw;height:120vh;transform:translate(-50%,-50%);
+      pointer-events:none;border:none;
     }
-
-    /* Profil-Karte */
     .card {
-      width: 350px;
-      padding: 30px;
-      border-radius: 20px;
-      backdrop-filter: blur(15px);
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      transform-style: preserve-3d;
+      width:350px;padding:30px;border-radius:20px;
+      backdrop-filter:blur(15px);
+      background:rgba(255,255,255,0.08);
+      box-shadow:0 20px 40px rgba(0,0,0,0.3);
+      text-align:center;transition:transform .3s,box-shadow .3s;
+      transform-style:preserve-3d;
     }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      border: 3px solid rgba(255, 255, 255, 0.5);
+    .avatar {width:120px;height:120px;border-radius:50%;margin-bottom:15px;border:3px solid rgba(255,255,255,0.5);}
+    h2.sunset-glow {
+      margin:10px 0 5px;
+      font-size:28px;
+      font-weight:bold;
+      background:linear-gradient(270deg,#ff9a00,#ff4d4d,#ff77aa,#a64dff);
+      background-size:600% 600%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:sunsetGlow 12s ease infinite;
+      text-shadow:0 0 15px rgba(255,120,50,0.7),
+                  0 0 30px rgba(255,80,120,0.5),
+                  0 0 45px rgba(180,80,255,0.4);
     }
-
-    h2 {
-      margin: 10px 0 5px;
+    @keyframes sunsetGlow {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
     }
-
-    p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #ddd;
+    p {margin:5px 0;font-size:14px;color:#ddd;}
+    .spotify-link img {width:40px;height:40px;margin-top:10px;cursor:pointer;transition:transform .2s;}
+    .spotify-link img:hover {transform:scale(1.2);}
+    .tags {display:flex;justify-content:center;gap:8px;margin:10px 0 15px;flex-wrap:wrap;}
+    .tag {
+      background:rgba(255,255,255,0.15);
+      padding:5px 12px;border-radius:12px;font-size:13px;
+      color:white;border:1px solid rgba(255,255,255,0.3);
+      backdrop-filter:blur(6px);
     }
-
-    /* Spotify Icon */
-    .spotify-link img {
-      width: 40px;
-      height: 40px;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .controls {margin-top:15px;}
+    .btn {
+      background:rgba(255,255,255,0.2);
+      border:none;color:white;padding:6px 12px;
+      border-radius:8px;cursor:pointer;margin:0 5px;
     }
-
-    .spotify-link img:hover {
-      transform: scale(1.2);
+    .progress-container {
+      width:100%;height:6px;background:rgba(255,255,255,0.2);
+      border-radius:4px;overflow:hidden;margin-top:10px;
+    }
+    .progress {height:100%;width:0;background:#00ff99;}
+    .volume {
+      margin-top:12px;
+      display:flex;align-items:center;gap:8px;
+      justify-content:center;
+    }
+    .volume input[type=range] {
+      width:150px;
     }
   </style>
 </head>
 <body>
-  <!-- Hintergrund Video -->
+  <!-- Hintergrund -->
   <div id="video-background">
-    <iframe id="ytplayer" type="text/html"
-      src="https://www.youtube.com/embed/GVX4sC6qKYk?autoplay=1&mute=1&controls=0&loop=1&playlist=GVX4sC6qKYk&modestbranding=1&showinfo=0"
-      allow="autoplay; fullscreen">
-    </iframe>
+    <iframe src="https://www.youtube.com/embed/Ulm_Z646eBg?autoplay=1&mute=1&controls=0&loop=1&playlist=Ulm_Z646eBg&modestbranding=1&showinfo=0"></iframe>
   </div>
 
   <!-- Profil Card -->
   <div class="card" id="profileCard">
-    <img src="https://cdn.discordapp.com/attachments/1375548792866340907/1411057867276030012/discord_pfp_512.png?ex=68b3458b&is=68b1f40b&hm=2fe9d76a670e36e2a2db9aa54feb4b1fed575086b96c5a2d4489f65151315cb0" 
-         alt="Avatar" class="avatar">
-    <h2>wasd_him</h2>
-    <p>ID: 1375536321405124791</p>
+    <img src="https://cdn.discordapp.com/attachments/1375548792866340907/1411057867276030012/discord_pfp_512.png?ex=68b4970b&is=68b3458b&hm=956bf5bd5739de2d3df14a05ecdf6e61c4665b4564be184e2babb278b4a71311" alt="Avatar" class="avatar">
+    <h2 class="sunset-glow">wasd_him</h2>
+    <p>Hobby's: Hobbylos</p>
+    <!-- Tags -->
+    <div class="tags">
+      <span class="tag">Fivem</span>
+      <span class="tag">Anime Fan</span>
+    </div>
 
     <!-- Spotify Button -->
-    <a class="spotify-link" href="https://open.spotify.com/playlist/36BS72kjzt0c8BIkwOvQUB?si=965ab48a57b04382" target="_blank">
+    <a class="spotify-link" href="https://open.spotify.com/playlist/1vjwkr6RppLcVCRCMVTX80?si=ae2b703b64994e01" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify">
     </a>
+
+    <!-- Audio Controls -->
+    <div class="controls">
+      <button class="btn" id="playBtn" onclick="togglePlay()">⏸️</button>
+    </div>
+    <div class="progress-container">
+      <div class="progress" id="progressBar"></div>
+    </div>
+
+    <!-- Lautstärke -->
+    <div class="volume">
+      🔉 <input type="range" id="volumeSlider" min="0" max="100" value="50"> 🔊
+    </div>
   </div>
 
+  <!-- Unsichtbarer YouTube-Player -->
+  <div id="yt-audio" style="display:none;"></div>
+
   <script>
-    const card = document.getElementById("profileCard");
-
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * 15; 
-      const rotateY = ((x - centerX) / centerX) * -15;
-
-      card.style.transform = `scale(1.07) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      card.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.5)";
+    // Karte Animation
+    const card=document.getElementById("profileCard");
+    card.addEventListener("mousemove",(e)=>{
+      const rect=card.getBoundingClientRect();
+      const x=e.clientX-rect.left,y=e.clientY-rect.top;
+      const centerX=rect.width/2,centerY=rect.height/2;
+      const rotateX=((y-centerY)/centerY)*15;
+      const rotateY=((x-centerX)/centerX)*-15;
+      card.style.transform=`scale(1.07) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      card.style.boxShadow="0 30px 60px rgba(0,0,0,0.5)";
+    });
+    card.addEventListener("mouseleave",()=>{
+      card.style.transform="scale(1) rotateX(0) rotateY(0)";
+      card.style.boxShadow="0 20px 40px rgba(0,0,0,0.3)";
     });
 
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "scale(1) rotateX(0deg) rotateY(0deg)";
-      card.style.boxShadow = "0 20px 40px rgba(0, 0, 0, 0.3)";
+    // YouTube Player
+    let audioPlayer,playing=true,progressBar;
+
+    function onYouTubeIframeAPIReady(){
+      audioPlayer=new YT.Player('yt-audio',{
+        height:'0',width:'0',videoId:'Ulm_Z646eBg',
+        playerVars:{autoplay:1,controls:0},
+        events:{onReady:onPlayerReady}
+      });
+    }
+
+    function onPlayerReady(event){
+      progressBar=document.getElementById("progressBar");
+      audioPlayer.mute();
+      audioPlayer.playVideo();
+      setTimeout(()=>audioPlayer.unMute(),500);
+      audioPlayer.setVolume(50);
+      setInterval(updateProgress,500);
+    }
+
+    function togglePlay(){
+      const btn=document.getElementById("playBtn");
+      if(!playing){
+        audioPlayer.playVideo();
+        playing=true;
+        btn.textContent="⏸️";
+      } else {
+        audioPlayer.pauseVideo();
+        playing=false;
+        btn.textContent="▶️";
+      }
+    }
+
+    function updateProgress(){
+      if(audioPlayer && audioPlayer.getDuration){
+        const dur=audioPlayer.getDuration(),cur=audioPlayer.getCurrentTime();
+        if(dur>0){progressBar.style.width=((cur/dur)*100)+"%";}
+      }
+    }
+
+    document.getElementById("volumeSlider").addEventListener("input",(e)=>{
+      const vol=parseInt(e.target.value);
+      if(audioPlayer && audioPlayer.setVolume){
+        audioPlayer.setVolume(vol);
+      }
     });
+
+    const tag=document.createElement("script");
+    tag.src="https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
   </script>
 </body>
 </html>
